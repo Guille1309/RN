@@ -2,21 +2,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeMenu from './src/components/HomeMenu';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name='Register' component={ Register } options={ {headerShown: false} }/>
+        <Stack.Screen name='Login' component={ Login } options={ {headerShown: false} }/>
+        <Stack.Screen name='HomeMenu' component={ HomeMenu } options={ {headerShown: false} }/>
       </Stack.Navigator>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home}/>
-        <Tab.Screen name="Profile" component={Profile}/>
-        <Tab.Screen name="Posts" component={Posts}/>
-      </Tab.Navigator>
     </NavigationContainer>
   );
 }
