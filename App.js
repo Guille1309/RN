@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeMenu from './src/components/HomeMenu';
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
+import MiPerfil from './src/screens/MiPerfil';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
