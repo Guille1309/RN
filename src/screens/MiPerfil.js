@@ -42,4 +42,8 @@ class MiPerfil extends Component{
     }
 }
 
+const styles = StyleSheet.create({
+    
+})
+
 export default MiPerfil;

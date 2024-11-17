@@ -12,10 +12,13 @@ class Register extends Component{
         })
     }
     
-
     render(){
         return
     }
 }
+
+const styles = StyleSheet.create({
+    
+})
 
 export default Register;

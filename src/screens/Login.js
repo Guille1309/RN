@@ -18,4 +18,8 @@ class Login extends Component{
     }
 }
 
+const styles = StyleSheet.create({
+    
+})
+
 export default Login;
