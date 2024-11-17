@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-class Login extends Component{
+class Register extends Component{
     constructor(){
         super();
     }
@@ -9,4 +9,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default Register;
