@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Text, TouchableOpacity } from "react-native-web";
+import { Text, TextInput, TouchableOpacity, View } from "react-native-web";
 import { auth } from "../firebase/config";
 import { StyleSheet } from "react-native";
 
