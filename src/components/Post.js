@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { StyleSheet } from "react-native";
 
 class Post extends Component{
     constructor(){

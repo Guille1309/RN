@@ -3,6 +3,7 @@ import {auth} from '../firebase/config';
 import { ActivityIndicator, FlatList, Text, View } from "react-native-web";
 import Post from "../components/Post";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { StyleSheet } from "react-native";
 
 class MiPerfil extends Component{
     constructor(props){

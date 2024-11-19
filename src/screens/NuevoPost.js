@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native-web";
 import { auth } from "../firebase/config";
+import { StyleSheet } from "react-native";
 
 class NuevoPost extends Component{
     constructor(){
