@@ -38,7 +38,7 @@ class Register extends Component {
                         createdAt: Date.now(),
                         userName: userName,
                     })
-
+                    this.props.navigation.navigate('HomeMenu')
                 })
                 .catch(error => {
                     this.setState({ error: 'Fallo en el registro' })
