@@ -14,51 +14,60 @@ class Register extends Component {
             error: '',
             usuarios: '',
             cargando: true,
-            disponible: false
+            deshabilitado: true,
+            errorEmail: '',
+            errorPass: '',
+            errorUsuario: ''
         }
     }
 
+    datosInput(campo, valor) {
+        this.setState({ [campo]: valor }, () => {
+            if (!valor) {
+                this.setState({
+                    deshabilitado: true,
+                });
+            }
+            else if (this.state.email && this.state.password && this.state.user) {
+                this.setState({
+                    deshabilitado: false
+                });
+            }
+        });
+    }
 
     register(email, pass, userName) {
-        if (!email || !pass || !userName) {
-            this.setState({
-                error: "Por favor, complete todos los campos",
-                disponible: false
-            })
+        this.setState({
+            error: ''
+        })
+        auth.createUserWithEmailAndPassword(email, pass)
+            .then(response => {
+                this.setState({ registered: true })
+                db.collection('users').add({
+                    owner: email,
+                    createdAt: Date.now(),
+                    userName: userName,
+                })
 
-        } else {
-            this.setState({
-                error: ''
             })
-            auth.createUserWithEmailAndPassword(email, pass)
-                .then(response => {
-                    this.setState({ registered: true })
-                    db.collection('users').add({
-                        owner: email,
-                        createdAt: Date.now(),
-                        userName: userName,
+            .catch(error => {
+                this.setState({ error: 'Fallo en el registro' })
+                if (error.code === 'auth/invalid-email') {
+                    this.setState({
+                        error: 'Ingrese un formato válido de email.'
                     })
+                } else if (error.code === 'auth/weak-password') {
+                    this.setState({
+                        error: 'Ingrese una contraseña de más de 6 caracteres.'
+                    })
+                } else {
+                    this.setState({
+                        error: error.message
+                    })
+                }
+                console.log("registro exitoso");
 
-                })
-                .catch(error => {
-                    this.setState({ error: 'Fallo en el registro' })
-                    if (error.code === 'auth/invalid-email') {
-                        this.setState({
-                            error: error.message
-                        })
-                    } else if (error.code === 'auth/weak-password') {
-                        this.setState({
-                            error: error.message
-                        })
-                    } else {
-                        this.setState({
-                            error: error.message
-                        })
-                    }
-                    console.log("registro exitoso");
-                    
-                })
-        }
+            })
 
     }
 
@@ -71,29 +80,32 @@ class Register extends Component {
                 <TextInput style={styles.input}
                     keyboardType='email-adress'
                     placeholder='email'
-                    onChangeText={text => this.setState({ email: text })}
+                    onChangeText={text => this.datosInput('email', text)}
                     value={this.state.email}
                 />
+
                 <TextInput style={styles.input}
                     keyboardType='default'
                     placeholder='password'
                     secureTextEntry={true}
-                    onChangeText={text => this.setState({ password: text })}
+                    onChangeText={text => this.datosInput('password', text)}
                     value={this.state.password}
                 />
 
                 <TextInput style={styles.input}
                     keyboardType='default'
                     placeholder='Nombre de usuario'
-                    onChangeText={text => this.setState({ user: text })}
+                    onChangeText={text => this.datosInput('user', text)}
                     value={this.state.user}
                 />
-                <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={styles.boton}>
+                <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={styles.boton} disabled={this.state.deshabilitado}>
                     <Text style={styles.textoBoton}>Register</Text>
                 </TouchableOpacity>
-
                 <Text>
-                    {this.state.error}
+                    {this.state.email && this.state.password && this.state.user ? null: "Complete todos los campos, por favor."}
+                </Text>
+                <Text>
+                    {this.state.error? this.state.error : null}
                 </Text>
 
 
