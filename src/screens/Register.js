@@ -22,8 +22,8 @@ class Register extends Component {
     }
 
     datosInput(campo, valor) {
-        this.setState({ [campo]: valor }, () => {
-            if (!valor) {
+        this.setState({ [campo]: valor.trim() }, () => {
+            if (!valor.trim()) {
                 this.setState({
                     deshabilitado: true,
                 });
@@ -48,6 +48,8 @@ class Register extends Component {
                     createdAt: Date.now(),
                     userName: userName,
                 })
+            this.props.navigation.navigate('Login')
+
 
             })
             .catch(error => {
@@ -64,10 +66,7 @@ class Register extends Component {
                     this.setState({
                         error: error.message
                     })
-                }
-                console.log("registro exitoso");
-
-            })
+            }})
 
     }
 
@@ -83,6 +82,9 @@ class Register extends Component {
                     onChangeText={text => this.datosInput('email', text)}
                     value={this.state.email}
                 />
+                <Text style = {styles.campoVacio}>
+                    {this.state.email ? null : "Complete el email."}
+                </Text>
 
                 <TextInput style={styles.input}
                     keyboardType='default'
@@ -91,6 +93,9 @@ class Register extends Component {
                     onChangeText={text => this.datosInput('password', text)}
                     value={this.state.password}
                 />
+                <Text style = {styles.campoVacio}>
+                    {this.state.password ? null : "Complete la contraseña."}
+                </Text>
 
                 <TextInput style={styles.input}
                     keyboardType='default'
@@ -98,15 +103,19 @@ class Register extends Component {
                     onChangeText={text => this.datosInput('user', text)}
                     value={this.state.user}
                 />
-                <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={styles.boton} disabled={this.state.deshabilitado}>
+                <Text style = {styles.campoVacio}>
+                    {this.state.user ? null : "Complete el usuario."}
+                </Text>
+                <Text>
+                    {this.state.error ? this.state.error : null}
+                </Text>
+                <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={this.state.deshabilitado ? styles.botonD : styles.botonH} disabled={this.state.deshabilitado}>
                     <Text style={styles.textoBoton}>Register</Text>
                 </TouchableOpacity>
-                <Text>
-                    {this.state.email && this.state.password && this.state.user ? null: "Complete todos los campos, por favor."}
-                </Text>
-                <Text>
-                    {this.state.error? this.state.error : null}
-                </Text>
+
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')} style={styles.botonH}>
+                    <Text style={styles.textoBoton}>Ir a login</Text>
+                </TouchableOpacity>
 
 
 
@@ -116,6 +125,9 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+    campoVacio:{
+        color:'red'
+    },
     container: {
         marginTop: 20,
         paddingHorizontal: 10
@@ -139,7 +151,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical: 10
     },
-    boton: {
+    botonH: {
         backgroundColor: '#28a745',
         paddingHorizontal: 10,
         paddingVertical: 6,
@@ -148,6 +160,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#28a745',
+        marginVertical: 10
+    },
+    botonD: {
+        backgroundColor: 'grey',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
         marginVertical: 10
     },
     textoBoton: {
