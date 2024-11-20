@@ -117,11 +117,11 @@ class Register extends Component {
                 <Text style = {styles.campoVacio}>
                     {this.state.user ? null : "Complete el usuario."}
                 </Text>
-                <Text>
+                <Text style = {styles.campoVacio}>
                     {this.state.error ? this.state.error : null}
                 </Text>
                 <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={this.state.deshabilitado ? styles.botonD : styles.botonH} disabled={this.state.deshabilitado}>
-                    <Text style={styles.textoBoton}>Register</Text>
+                    <Text style={styles.textoBoton}>Registrar</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')} style={styles.botonH}>
@@ -136,55 +136,58 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-    campoVacio:{
-        color:'red'
-    },
     container: {
-        marginTop: 20,
-        paddingHorizontal: 10
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#F3E5F5",
+        alignItems: "center",
     },
     titulo: {
-        fontSize: 50,
-        fontWeight: 700,
-        margin: 10
-    },
-    texto: {
-        margin: 10,
-        fontSize: 20
+        fontSize: 24,
+        fontWeight: "bold",
+        color: "#6A1B9A",
+        marginBottom: 20,
     },
     input: {
-        height: 20,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
+        width: "90%",
+        padding: 15,
+        backgroundColor: "#EDE7F6",
+        borderRadius: 10,
+        borderColor: "#7B1FA2",
         borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical: 10
+        marginBottom: 15,
+        fontSize: 16,
+        color: "#4A148C",
     },
-    botonH: {
-        backgroundColor: '#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
-        marginVertical: 10
+    botonHabilitado: {
+        backgroundColor: "#8E24AA",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: "center",
+        width: "90%",
+        marginBottom: 15,
     },
-    botonD: {
-        backgroundColor: 'grey',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius: 4,
-        marginVertical: 10
+    botonDeshabilitado: {
+        backgroundColor: "#D1C4E9",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: "center",
+        width: "90%",
+        marginBottom: 15,
     },
     textoBoton: {
-        color: '#fff',
-        textAlign: 'center'
-    }
-})
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#FFFFFF",
+    },
+    campoVacio: {
+        color: "red",
+        fontSize: 14,
+        marginBottom: 10,
+        width: "90%",
+    },
+});
 
 export default Register;

@@ -15,7 +15,8 @@ class Post extends Component{
             id: this.props.datos.id,
             usuario: auth.currentUser.email,
             usuarioLikeo: this.props.datos.data.likes.includes(auth.currentUser.email),
-            cantLikes: this.props.datos.data.likes.length
+            cantLikes: this.props.datos.data.likes.length,
+            isHome: false
         }
     }
 
@@ -62,10 +63,11 @@ class Post extends Component{
     }
 
     render(){
-        console.log(this.state.datos)
+        console.log(this.props)
         return(
+
             <View style={styles.container}>
-                {this.state.usuario === this.state.datos.owner ? (
+                {this.state.usuario === this.state.datos.owner && this.state.isHome? (
                     <TouchableOpacity onPress={() => this.borrarPost(this.state.id)}>
                         <FontAwesome6 name="trash-can" size={20} color="#4A148C" />
                     </TouchableOpacity>
