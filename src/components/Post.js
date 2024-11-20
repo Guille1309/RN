@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from "react-native-web";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { auth, db } from "../firebase/config";
 import firebase from 'firebase';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 
 class Post extends Component{
@@ -48,15 +49,33 @@ class Post extends Component{
         }
     }
 
+    borrarPost(id){
+        db.collection('posts')
+        .doc(id)
+        .delete()
+        .then( () => {
+            console.log(`Post ${id} eliminado exitosamente! :)`)
+        })
+        .catch( (e) => {
+            console.log(e)
+        })
+    }
+
     render(){
         console.log(this.state.datos)
         return(
             <View style={styles.container}>
+                {this.state.usuario === this.state.datos.owner ? (
+                    <TouchableOpacity onPress={() => this.borrarPost(this.state.id)}>
+                        <FontAwesome6 name="trash-can" size={20} color="#4A148C" />
+                    </TouchableOpacity>
+                ) : null}
                 <View style={styles.containerPost}>
+                    <Text style={styles.textoUsuario}>{this.state.datos.owner}</Text>
                     <Text style={styles.textoPost}>{this.state.datos.post}</Text>
                 </View>
                 <TouchableOpacity onPress={ () => {this.actualizarLikes(this.state.id)}}>
-                    <Text> <AntDesign name={this.state.usuarioLikeo ? "heart" : "hearto"} size={20} color="#4A148C"/> </Text>
+                    <AntDesign name={this.state.usuarioLikeo ? "heart" : "hearto"} size={20} color="#4A148C"/>
                 </TouchableOpacity>
                 <Text style={styles.likes}>{this.state.cantLikes}</Text>
             </View>
@@ -66,18 +85,24 @@ class Post extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#F3E5F5",
+        backgroundColor: '#F3E5F5',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
     },
     containerPost: {
-        backgroundColor: "#E1BEE7",
+        backgroundColor: '#E1BEE7',
         marginVertical: 10,
         marginHorizontal: 20,
         padding: 15,
         borderRadius: 8,
         flex: 1,
+    },
+    textoUsuario:{
+        fontWeight: 'bold',
+        fontSize: 14, 
+        color: '#6A1B9A',
+        marginBottom: 5
     },
     textoPost: {
         fontSize: 16,
