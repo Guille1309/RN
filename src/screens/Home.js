@@ -14,7 +14,7 @@ class Home extends Component{
         }
     }
     componentDidMount() {
-        db.collection('posts').onSnapshot(docs => {
+        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(docs => {
             let posts = [];
             docs.forEach(doc => posts.push({
                 id: doc.id,
@@ -29,7 +29,7 @@ class Home extends Component{
     render() {
         return (
             <View>
-                {this.state.cargando ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} />} />}
+                {this.state.cargando ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
             </View>
         )
     }

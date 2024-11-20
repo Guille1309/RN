@@ -7,8 +7,8 @@ import firebase from 'firebase';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 
-class Post extends Component{
-    constructor(props){
+class Post extends Component {
+    constructor(props) {
         super(props);
         this.state = {
             datos: this.props.datos.data,
@@ -16,16 +16,16 @@ class Post extends Component{
             usuario: auth.currentUser.email,
             usuarioLikeo: this.props.datos.data.likes.includes(auth.currentUser.email),
             cantLikes: this.props.datos.data.likes.length,
-            isHome: false
+
         }
     }
 
-    actualizarLikes(id){
-        if(this.state.usuarioLikeo){ // el usuario ya dio like, ahora vamos a sacar el like
+    actualizarLikes(id) {
+        if (this.state.usuarioLikeo) { // el usuario ya dio like, ahora vamos a sacar el like
             db.collection('posts')
-            .doc(id)
-            .update({
-                likes: firebase.firestore.FieldValue.arrayRemove(this.state.usuario)
+                .doc(id)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayRemove(this.state.usuario)
                 })
                 .then(() => {
                     this.setState({
@@ -34,11 +34,11 @@ class Post extends Component{
                     })
                 })
                 .catch(e => console.log(e))
-        } else{ // el usuario no dio like antes, lo va a dar ahora
+        } else { // el usuario no dio like antes, lo va a dar ahora
             db.collection('posts')
-            .doc(id)
-            .update({
-                likes: firebase.firestore.FieldValue.arrayUnion(this.state.usuario)
+                .doc(id)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayUnion(this.state.usuario)
                 })
                 .then(() => {
                     this.setState({
@@ -50,24 +50,24 @@ class Post extends Component{
         }
     }
 
-    borrarPost(id){
+    borrarPost(id) {
         db.collection('posts')
-        .doc(id)
-        .delete()
-        .then( () => {
-            console.log(`Post ${id} eliminado exitosamente! :)`)
-        })
-        .catch( (e) => {
-            console.log(e)
-        })
+            .doc(id)
+            .delete()
+            .then(() => {
+                console.log(`Post ${id} eliminado exitosamente! :)`)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 
-    render(){
+    render() {
         console.log(this.props)
-        return(
+        return (
 
             <View style={styles.container}>
-                {this.state.usuario === this.state.datos.owner && this.state.isHome? (
+                {this.state.usuario === this.state.datos.owner && !this.props.isHome ? (
                     <TouchableOpacity onPress={() => this.borrarPost(this.state.id)}>
                         <FontAwesome6 name="trash-can" size={20} color="#4A148C" />
                     </TouchableOpacity>
@@ -75,11 +75,24 @@ class Post extends Component{
                 <View style={styles.containerPost}>
                     <Text style={styles.textoUsuario}>{this.state.datos.owner}</Text>
                     <Text style={styles.textoPost}>{this.state.datos.post}</Text>
+                    <View style={styles.likeContainer}>
+                        <TouchableOpacity
+                            style={styles.likeButton}
+                            onPress={() => this.actualizarLikes(this.state.id)}>
+                            <AntDesign
+                                name={this.state.usuarioLikeo ? "heart" : "hearto"}
+                                size={20}
+                                color="#FFFFFF"
+                            />
+                            <Text style={styles.likeText}>
+                                {this.state.usuarioLikeo ? "Te gusta" : "Me gusta"}
+                            </Text>
+                            <Text style={styles.likeText}>{this.state.cantLikes}</Text>
+
+                        </TouchableOpacity>
+                        
+                    </View>
                 </View>
-                <TouchableOpacity onPress={ () => {this.actualizarLikes(this.state.id)}}>
-                    <AntDesign name={this.state.usuarioLikeo ? "heart" : "hearto"} size={20} color="#4A148C"/>
-                </TouchableOpacity>
-                <Text style={styles.likes}>{this.state.cantLikes}</Text>
             </View>
         )
     }
@@ -100,9 +113,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         flex: 1,
     },
-    textoUsuario:{
+    textoUsuario: {
         fontWeight: 'bold',
-        fontSize: 14, 
+        fontSize: 14,
         color: '#6A1B9A',
         marginBottom: 5
     },
@@ -111,9 +124,30 @@ const styles = StyleSheet.create({
         color: "#4A148C",
     },
     likes: {
-        fontSize: 20,
+        fontSize: 14,
         color: "#6A1B9A",
         fontWeight: "bold",
+        marginTop: 5,
+    },
+    likeContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop: 10,
+    },
+    likeButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "#8E24AA",
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        borderRadius: 20,
+    },
+    likeText: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginLeft: 8,
     },
 });
 

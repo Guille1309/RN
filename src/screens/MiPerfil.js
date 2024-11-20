@@ -52,7 +52,7 @@ class MiPerfil extends Component{
                 <Text style={styles.texto}>{this.state.email}</Text>
                 <Text style={styles.texto}>Cantidad de posts: {this.state.posts.length}</Text>
                 <Text style={styles.titulo}>Mis posts</Text>
-                {this.state.cargando ? <ActivityIndicator/> : (this.state.posts.length === 0 ? <Text style={styles.texto}>No tienes posts aún...</Text> : <FlatList style={styles.listaPosts} data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({item}) => <Post datos={item}/>}/>)}
+                {this.state.cargando ? <ActivityIndicator/> : (this.state.posts.length === 0 ? <Text style={styles.texto}>No tienes posts aún...</Text> : <FlatList style={styles.listaPosts} data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({item}) => <Post datos={item} isHome={false}/>}/>)}
                 <TouchableOpacity style={styles.containerLogout} onPress={ () => this.logout()}>
                     <MaterialCommunityIcons name="logout" size={24} color="#4A148C" />
                     <Text style={styles.textoLogout}>Cerrar sesión</Text>
