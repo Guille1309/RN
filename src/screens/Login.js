@@ -4,8 +4,8 @@ import { auth } from "../firebase/config";
 import { StyleSheet } from "react-native";
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: '',
             password: '',
@@ -15,6 +15,11 @@ class Login extends Component {
 
     componentDidMount(){
         auth.onAuthStateChanged(user => {
+            if (user) {
+                this.props.navigation.navigate('HomeMenu')
+            }else{
+                this.props.navigation.navigate('Login')
+            }
             console.log(user)
         })
     }
@@ -54,7 +59,7 @@ class Login extends Component {
                 <Text style={styles.titulo}>Inicia sesión</Text>
 
                 <TextInput style={styles.input}
-                    keyboardType='email-adress'
+                    keyboardType='email-address'
                     placeholder='email'
                     onChangeText={text => this.setState({ email: text })}
                     value={this.state.email}

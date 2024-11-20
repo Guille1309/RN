@@ -21,6 +21,17 @@ class Register extends Component {
         }
     }
 
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                this.props.navigation.navigate('HomeMenu')
+            }else{
+                this.props.navigation.navigate('Register')
+            }
+            console.log(user)
+        })
+    }
+
     datosInput(campo, valor) {
         this.setState({ [campo]: valor.trim() }, () => {
             if (!valor.trim()) {
@@ -77,7 +88,7 @@ class Register extends Component {
                 <Text style={styles.titulo}>Registrate</Text>
 
                 <TextInput style={styles.input}
-                    keyboardType='email-adress'
+                    keyboardType='email-address'
                     placeholder='email'
                     onChangeText={text => this.datosInput('email', text)}
                     value={this.state.email}
