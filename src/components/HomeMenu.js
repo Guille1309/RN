@@ -17,7 +17,7 @@ function HomeMenu() {
             <Tab.Screen name='NuevoPost' component={NuevoPost} options={
                 {tabBarIcon: ()=> <Entypo name="camera" size={24} color="black" />}
             }/>
-            <Tab.Screen name='Profile' component={MiPerfil} options={
+            <Tab.Screen name='Mi perfil' component={MiPerfil} options={
                 {tabBarIcon: ()=> <Entypo name="user" size={24} color="black" />}
             }/>
         </Tab.Navigator>

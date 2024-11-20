@@ -12,6 +12,13 @@ class Login extends Component {
             loggedIn: undefined,
         }
     }
+
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            console.log(user)
+        })
+    }
+
     login(email, pass) {
         auth.signInWithEmailAndPassword(email, pass)
             .then((response) => {
