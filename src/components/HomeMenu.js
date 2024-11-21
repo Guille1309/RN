@@ -12,13 +12,13 @@ function HomeMenu() {
     return(
         <Tab.Navigator>
             <Tab.Screen name='Home' component={Home} options={
-                {tabBarIcon: ()=> <Entypo name="home" size={24} color="black" />}
+                {tabBarIcon: ()=> <Entypo name="home" size={24} color="#6A1B9A" />}
             }/>
             <Tab.Screen name='Nuevo post' component={NuevoPost} options={
-                {tabBarIcon: ()=> <Entypo name="camera" size={24} color="black" />}
+                {tabBarIcon: ()=> <Entypo name="plus" size={24} color="#6A1B9A" />}
             }/>
             <Tab.Screen name='Mi perfil' component={MiPerfil} options={
-                {tabBarIcon: ()=> <Entypo name="user" size={24} color="black" />}
+                {tabBarIcon: ()=> <Entypo name="user" size={24} color="#6A1B9A" />}
             }/>
         </Tab.Navigator>
     )
