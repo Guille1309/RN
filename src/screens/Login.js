@@ -89,38 +89,40 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
-        paddingHorizontal: 10
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#F3E5F5",
+        alignItems: "center",
     },
     titulo: {
-        fontSize: 50,
-        fontWeight: 700,
-        margin: 10
+        fontSize: 24,
+        fontWeight: "bold",
+        color: "#6A1B9A",
+        marginBottom: 20,
     },
     texto: {
         margin: 10,
         fontSize: 20
     },
     input: {
-        height: 20,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
+        width: "90%",
+        padding: 15,
+        backgroundColor: "#EDE7F6",
+        borderRadius: 10,
+        borderColor: "#7B1FA2",
         borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical: 10
+        marginBottom: 15,
+        fontSize: 16,
+        color: "#4A148C",
     },
     boton: {
-        backgroundColor: '#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
-        marginVertical: 10
+        backgroundColor: "#8E24AA",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: "center",
+        width: "90%",
+        marginBottom: 15,
     },
     textoBoton: {
         color: '#fff',
