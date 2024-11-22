@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native-web";
 import { auth, db } from "../firebase/config";
 import { StyleSheet } from "react-native";
+import Header from "../components/Header";
 
 class NuevoPost extends Component {
     constructor() {
@@ -35,6 +36,7 @@ class NuevoPost extends Component {
         render(){
             return (
                 <View style={styles.container}>
+                    <Header/>
                     <Text style={styles.titulo}>Nuevo post</Text>
 
                     <TextInput style={styles.input}

@@ -1,8 +1,9 @@
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, Text } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { Component } from "react";
 import { db } from "../firebase/config";
 import Post from "../components/Post";
+import Header from "../components/Header";
 
 class Home extends Component{
 
@@ -28,23 +29,24 @@ class Home extends Component{
     }
     render() {
         return (
-            <View>
-                {this.state.cargando ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
+            <View style = {styles.homeContainer}>
+                <Header/>
+                {this.state.cargando ? <ActivityIndicator /> : <FlatList style={styles.postList} data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    titulo: {
-        fontSize: 50,
-        fontWeight: 700,
-        margin: 10
+    homeContainer: {
+        flex: 1,
+        backgroundColor: '#F3E5F5',
+        padding: 20,
+        alignItems: 'center',
     },
-    subtitulo: {
-        fontSize: 30,
-        marginHorizontal: 10
-    }
+    postList: {
+        width: '100%',
+    },
 })
 
 export default Home;

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Text, TextInput, View, StyleSheet } from "react-native-web";
+import Header from "../components/Header";
 
 class Buscador extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Buscador extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Header/>
                 <TextInput
                     style={styles.input}
                     keyboardType="default"

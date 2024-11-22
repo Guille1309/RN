@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native-web";
 import { auth } from "../firebase/config";
 import { StyleSheet } from "react-native";
+import Header from "../components/Header";
 
 class Login extends Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Header/>
                 <Text style={styles.titulo}>Inicia sesión</Text>
 
                 <TextInput style={styles.input}

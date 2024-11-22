@@ -4,6 +4,7 @@ import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react
 import Post from "../components/Post";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { StyleSheet } from "react-native";
+import Header from "../components/Header";
 
 class MiPerfil extends Component{
     constructor(props){
@@ -48,6 +49,7 @@ class MiPerfil extends Component{
     render(){
         return(
             <View style={styles.container}>
+                <Header/>
                 <Text style={styles.titulo}>{this.state.userName}</Text>
                 <Text style={styles.texto}>{this.state.email}</Text>
                 <Text style={styles.texto}>Cantidad de posts: {this.state.posts.length}</Text>

@@ -2,6 +2,7 @@ import { Component } from "react";
 import { auth, db } from "../firebase/config";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native";
+import Header from "../components/Header";
 
 class Register extends Component {
     constructor(props) {
@@ -17,15 +18,19 @@ class Register extends Component {
             deshabilitado: true,
             errorEmail: '',
             errorPass: '',
-            errorUsuario: ''
+            errorUsuario: '',
+            tocoEmail: false,
+            tocoPass: false,
+            tocoUser: false
+
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         auth.onAuthStateChanged(user => {
             if (user) {
                 this.props.navigation.navigate('HomeMenu')
-            }else{
+            } else {
                 this.props.navigation.navigate('Register')
             }
             console.log(user)
@@ -59,7 +64,7 @@ class Register extends Component {
                     createdAt: Date.now(),
                     userName: userName,
                 })
-            this.props.navigation.navigate('Login')
+                this.props.navigation.navigate('Login')
 
 
             })
@@ -77,13 +82,15 @@ class Register extends Component {
                     this.setState({
                         error: error.message
                     })
-            }})
+                }
+            })
 
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <Header />
 
                 <Text style={styles.titulo}>Registrate</Text>
 
@@ -91,40 +98,45 @@ class Register extends Component {
                     keyboardType='email-address'
                     placeholder='email'
                     onChangeText={text => this.datosInput('email', text)}
+                    onBlur={ () => this.setState({ tocoEmail: true })}
                     value={this.state.email}
                 />
-                <Text style = {styles.campoVacio}>
-                    {this.state.email ? null : "Complete el email."}
+
+                <Text style={styles.campoVacio}>
+                    {!this.state.email && this.state.tocoEmail ?"Complete el email." : null }
                 </Text>
+                
 
                 <TextInput style={styles.input}
                     keyboardType='default'
                     placeholder='password'
                     secureTextEntry={true}
                     onChangeText={text => this.datosInput('password', text)}
+                    onBlur={ () => this.setState({ tocoPass: true })}
                     value={this.state.password}
                 />
-                <Text style = {styles.campoVacio}>
-                    {this.state.password ? null : "Complete la contraseña."}
+                <Text style={styles.campoVacio}>
+                    {!this.state.password && this.state.tocoPass ? "Complete la contraseña." : null }
                 </Text>
 
                 <TextInput style={styles.input}
                     keyboardType='default'
                     placeholder='Nombre de usuario'
                     onChangeText={text => this.datosInput('user', text)}
+                    onBlur={ () => this.setState({ tocoUser: true })}
                     value={this.state.user}
                 />
-                <Text style = {styles.campoVacio}>
-                    {this.state.user ? null : "Complete el usuario."}
+                <Text style={styles.campoVacio}>
+                    {!this.state.user && this.state.tocoUser ? "Complete el usuario." : null }
                 </Text>
-                <Text style = {styles.campoVacio}>
+                <Text style={styles.campoVacio}>
                     {this.state.error ? this.state.error : null}
                 </Text>
                 <TouchableOpacity onPress={() => { this.register(this.state.email, this.state.password, this.state.user) }} style={this.state.deshabilitado ? styles.botonD : styles.botonH} disabled={this.state.deshabilitado}>
                     <Text style={styles.textoBoton}>Registrar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')} style={styles.botonH}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.botonH}>
                     <Text style={styles.textoBoton}>Ir a login</Text>
                 </TouchableOpacity>
 
@@ -159,7 +171,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#4A148C",
     },
-    botonHabilitado: {
+    botonH: {
         backgroundColor: "#8E24AA",
         paddingVertical: 10,
         paddingHorizontal: 20,
@@ -168,7 +180,7 @@ const styles = StyleSheet.create({
         width: "90%",
         marginBottom: 15,
     },
-    botonDeshabilitado: {
+    botonD: {
         backgroundColor: "#D1C4E9",
         paddingVertical: 10,
         paddingHorizontal: 20,
