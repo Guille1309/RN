@@ -1,5 +1,6 @@
 import { Component } from "react";
-import { Text, TextInput, View, StyleSheet } from "react-native-web";
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from "react-native-web";
+import { auth, db } from '../firebase/config';
 import Header from "../components/Header";
 
 class Buscador extends Component {
@@ -7,22 +8,38 @@ class Buscador extends Component {
         super(props);
         this.state = {
             valorInput: '',
+            email: auth.currentUser.email,
+            resultados: [],
+            cargando: true
         }
     }
     controladorCambios(text) {
         this.setState(
-            { valorInput: text }, 
+            { valorInput: text },
             () => {
-              if (this.props.filtrar) {
-                this.props.filtrar(this.state.valorInput); 
-              }
+                if (this.props.filtrar) {
+                    this.props.filtrar(this.state.valorInput);
+                }
             }
-          );
+        );
+    }
+    buscar() {
+        db.collection('users').where('email', '==', this.state.valorInput).onSnapshot(docs => {
+            let resultados = [];
+            docs.forEach(doc => {
+                resultados.push(doc.data());
+            });
+            this.setState({
+                resultados: resultados,
+                cargando: false
+            });
+        });
+
     }
     render() {
         return (
             <View style={styles.container}>
-                <Header/>
+                <Header />
                 <TextInput
                     style={styles.input}
                     keyboardType="default"
@@ -30,7 +47,12 @@ class Buscador extends Component {
                     onChangeText={(text) => this.controladorCambios(text)}
                     value={this.state.valorInput}
                 />
-                
+                <TouchableOpacity style={styles.boton} onPress={() => this.buscar()}>
+                    <Text style={styles.textoBoton}>Buscar</Text>
+                </TouchableOpacity>
+
+                {this.state.cargando ? <ActivityIndicator /> : <FlatList style={styles.buscarLista} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
+
             </View>
         )
     }
