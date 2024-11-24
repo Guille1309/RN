@@ -8,32 +8,42 @@ class Buscador extends Component {
         super(props);
         this.state = {
             valorInput: '',
-            email: auth.currentUser.email,
             resultados: [],
-            cargando: true
+            cargando: false
         }
     }
     controladorCambios(text) {
         this.setState(
-            { valorInput: text },
-            () => {
-                if (this.props.filtrar) {
-                    this.props.filtrar(this.state.valorInput);
-                }
-            }
+            { valorInput: text }
         );
     }
     buscar() {
-        db.collection('users').where('email', '==', this.state.valorInput).onSnapshot(docs => {
-            let resultados = [];
-            docs.forEach(doc => {
-                resultados.push(doc.data());
+        const valorInput = this.state;
+        if (valorInput === "") {
+            this.setState({ resultados: [] });
+            return;
+        }
+        this.setState(
+            {
+                cargando: true,
+                resultados: []
             });
-            this.setState({
-                resultados: resultados,
-                cargando: false
+
+        db.collection('users')
+            .where('owner', ">=", valorInput)
+            .where('owner', "<=", valorInput)
+            .get()
+            .then((querySnapshot) => {
+                const resultados = [];
+                querySnapshot.forEach((doc) => {
+                    resultados.push({ id: doc.id, ...doc.data() });
+                });
+                this.setState({ resultados, cargando: false });
+            })
+            .catch((error) => {
+                console.error("Error al buscar usuarios:", error);
+                this.setState({ cargando: false });
             });
-        });
 
     }
     render() {
@@ -43,16 +53,27 @@ class Buscador extends Component {
                 <TextInput
                     style={styles.input}
                     keyboardType="default"
-                    placeholder="Inserte su búsqueda"
+                    placeholder="Inserte su búsqueda por nombre"
                     onChangeText={(text) => this.controladorCambios(text)}
                     value={this.state.valorInput}
                 />
                 <TouchableOpacity style={styles.boton} onPress={() => this.buscar()}>
                     <Text style={styles.textoBoton}>Buscar</Text>
                 </TouchableOpacity>
-
-                {this.state.cargando ? <ActivityIndicator /> : <FlatList style={styles.buscarLista} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
-
+                {this.state.cargando ? (
+                    <ActivityIndicator />
+                ) : (
+                    <FlatList
+                        style={styles.resultados}
+                        data={this.state.resultados}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.item}>
+                                <Post datos={item} isHome={false}/>
+                            </View>
+                        )}
+                    />
+                )}
             </View>
         )
     }
