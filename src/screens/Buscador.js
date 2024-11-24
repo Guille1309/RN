@@ -9,7 +9,7 @@ class Buscador extends Component {
         this.state = {
             valorInput: '',
             resultados: [],
-            cargando: false
+            cargando: false,
         }
     }
     controladorCambios(text) {
@@ -18,33 +18,22 @@ class Buscador extends Component {
         );
     }
     buscar() {
-        const valorInput = this.state;
-        if (valorInput === "") {
-            this.setState({ resultados: [] });
-            return;
-        }
-        this.setState(
-            {
-                cargando: true,
-                resultados: []
-            });
-
-        db.collection('users')
-            .where('owner', ">=", valorInput)
-            .where('owner', "<=", valorInput)
-            .get()
-            .then((querySnapshot) => {
-                const resultados = [];
-                querySnapshot.forEach((doc) => {
-                    resultados.push({ id: doc.id, ...doc.data() });
-                });
-                this.setState({ resultados, cargando: false });
+        db.collection('posts')
+            .where('owner', '==', this.state).onSnapshot(docs => {
+                let resultados = [];
+                docs.forEach(doc =>{
+                    resultados.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+                this.setState({
+                    resultados: resultados,
+                    cargando: false
+                })
+                console.log(resultados);
+                this.props.navigation.navigate('ResultadosBusqueda');
             })
-            .catch((error) => {
-                console.error("Error al buscar usuarios:", error);
-                this.setState({ cargando: false });
-            });
-
     }
     render() {
         return (
@@ -60,20 +49,6 @@ class Buscador extends Component {
                 <TouchableOpacity style={styles.boton} onPress={() => this.buscar()}>
                     <Text style={styles.textoBoton}>Buscar</Text>
                 </TouchableOpacity>
-                {this.state.cargando ? (
-                    <ActivityIndicator />
-                ) : (
-                    <FlatList
-                        style={styles.resultados}
-                        data={this.state.resultados}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <View style={styles.item}>
-                                <Post datos={item} isHome={false}/>
-                            </View>
-                        )}
-                    />
-                )}
             </View>
         )
     }
@@ -103,6 +78,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#4A148C",
     },
+    boton: {
+        backgroundColor: "#8E24AA",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: "center",
+        width: "90%",
+        marginBottom: 15,
+    },
+    textoBoton: {
+        color: '#fff',
+        textAlign: 'center'
+    }
 });
 
 export default Buscador;
