@@ -2,24 +2,26 @@ import { Component } from "react";
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from "react-native-web";
 import { auth, db } from '../firebase/config';
 import Header from "../components/Header";
+import Filtro from "../components/Filtro";
 
 class Buscador extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             valorInput: '',
             resultados: [],
-            cargando: false,
+            cargando: true,
+            backup: [],
         }
     }
     controladorCambios(text) {
         this.setState(
-            { valorInput: text }
+            { valorInput: text },
+
         );
     }
-    buscar() {
-        db.collection('posts')
-            .where('owner', '==', this.state).onSnapshot(docs => {
+    componentDidMount() {
+        db.collection('users').onSnapshot(docs => {
                 let resultados = [];
                 docs.forEach(doc =>{
                     resultados.push({
@@ -29,26 +31,24 @@ class Buscador extends Component {
                 })
                 this.setState({
                     resultados: resultados,
-                    cargando: false
+                    cargando: false,
+                    backup: resultados,
                 })
-                console.log(resultados);
-                this.props.navigation.navigate('ResultadosBusqueda');
             })
+    }
+    filtrar(user){
+        let usuariosFiltrados = this.state.backup.filter(resultado => resultado.data.userName.toLowerCase().includes(user.toLowerCase()));
+        this.setState({
+            resultados: usuariosFiltrados,
+        })
     }
     render() {
         return (
             <View style={styles.container}>
-                <Header />
-                <TextInput
-                    style={styles.input}
-                    keyboardType="default"
-                    placeholder="Inserte su búsqueda por nombre"
-                    onChangeText={(text) => this.controladorCambios(text)}
-                    value={this.state.valorInput}
-                />
-                <TouchableOpacity style={styles.boton} onPress={() => this.buscar()}>
-                    <Text style={styles.textoBoton}>Buscar</Text>
-                </TouchableOpacity>
+                <Header/>
+                <Filtro filtrar={(user)=> this.filtrar(user)}/>
+               {(this.state.resultados.length === 0) ? <Text>El user name no existe</Text> : this.state.resultados.map((user, id) =>  <Text key={user.id}>{user.data.userName}</Text>)} 
+
             </View>
         )
     }

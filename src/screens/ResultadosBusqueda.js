@@ -8,7 +8,7 @@ function ResultadosBusqueda (route){
         <View style={styles.container}>
             <Text style={styles.title}>Resultados de su búsqueda...</Text>
             <Header/>
-            <FlatList style={styles.postList} data={resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />
+            <FlatList style={styles.postList} data={resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={resultados} isHome={true} />} />
         </View>
     );
 };
