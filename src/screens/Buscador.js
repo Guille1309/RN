@@ -44,11 +44,14 @@ class Buscador extends Component {
             <View style={styles.container}>
                 <Header/>
                 <Filtro filtrar={(user) => this.filtrar(user)} />
-                {this.state.resultados.length === 0 ? (
-                <Text style={styles.textoNoUserName}>El user name no existe</Text>
-                ) : (
-                    <FlatList style={styles.containerUsuarios} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Text style={styles.usuarios}>{item.data.userName}</Text>} />
-                )}
+                {this.state.cargando ? <ActivityIndicator/> : 
+                    (this.state.resultados.length === 0) ? (
+                    <Text style={styles.textoNoUserName}>El user name no existe</Text>
+                    ) : (
+                        <FlatList style={styles.containerUsuarios} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Text style={styles.usuarios}>{item.data.userName}</Text>} />
+                    )
+                }
+                
             </View>
         )
     }
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     containerUsuarios:{
+        width: '100%',
     },
     usuarios: {
         fontSize: 16,
