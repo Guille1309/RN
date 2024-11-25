@@ -65,7 +65,6 @@ class Post extends Component {
     render() {
         console.log(this.props)
         return (
-
             <View style={styles.container}>
                 {this.state.usuario === this.state.datos.owner && !this.props.isHome ? (
                     <TouchableOpacity onPress={() => this.borrarPost(this.state.id)}>
@@ -88,9 +87,7 @@ class Post extends Component {
                                 {this.state.usuarioLikeo ? "Te gusta" : "Me gusta"}
                             </Text>
                             <Text style={styles.likeText}>{this.state.cantLikes}</Text>
-
                         </TouchableOpacity>
-                        
                     </View>
                 </View>
             </View>

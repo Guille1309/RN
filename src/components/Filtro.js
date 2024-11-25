@@ -10,13 +10,14 @@ class Filtro extends Component{
             valorInput: '',
         }
     }
+    
     controladorCambios(text){
         this.setState(
             { valorInput: text },
             () => this.props.filtrar(this.state.valorInput)
         );
-      
     }
+
     render(){
         return(
             <View>
