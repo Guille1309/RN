@@ -17,7 +17,6 @@ class Buscador extends Component {
     controladorCambios(text) {
         this.setState(
             { valorInput: text },
-
         );
     }
     componentDidMount() {
@@ -48,7 +47,6 @@ class Buscador extends Component {
                 <Header/>
                 <Filtro filtrar={(user)=> this.filtrar(user)}/>
                {(this.state.resultados.length === 0) ? <Text>El user name no existe</Text> : this.state.resultados.map((user, id) =>  <Text key={user.id}>{user.data.userName}</Text>)} 
-
             </View>
         )
     }
@@ -66,30 +64,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#6A1B9A",
         marginBottom: 20,
-    },
-    input: {
-        width: "90%",
-        padding: 15,
-        backgroundColor: "#EDE7F6",
-        borderRadius: 10,
-        borderColor: "#7B1FA2",
-        borderWidth: 1,
-        marginBottom: 15,
-        fontSize: 16,
-        color: "#4A148C",
-    },
-    boton: {
-        backgroundColor: "#8E24AA",
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        alignItems: "center",
-        width: "90%",
-        marginBottom: 15,
-    },
-    textoBoton: {
-        color: '#fff',
-        textAlign: 'center'
     }
 });
 
