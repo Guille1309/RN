@@ -14,11 +14,11 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         auth.onAuthStateChanged(user => {
             if (user) {
                 this.props.navigation.navigate('HomeMenu')
-            }else{
+            } else {
                 this.props.navigation.navigate('Login')
             }
             console.log(user)
@@ -57,7 +57,7 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header/>
+                <Header />
                 <Text style={styles.titulo}>Inicia sesión</Text>
 
                 <TextInput style={styles.input}

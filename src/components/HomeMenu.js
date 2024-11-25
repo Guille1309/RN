@@ -10,20 +10,20 @@ import Buscador from '../screens/Buscador';
 const Tab = createBottomTabNavigator();
 
 function HomeMenu() {
-    return(
+    return (
         <Tab.Navigator>
             <Tab.Screen name='Home' component={Home} options={
-                {tabBarIcon: ()=> <Entypo name="home" size={24} color="#6A1B9A" />}
-            }/>
+                { tabBarIcon: () => <Entypo name="home" size={24} color="#6A1B9A" /> }
+            } />
             <Tab.Screen name='Nuevo post' component={NuevoPost} options={
-                {tabBarIcon: ()=> <Entypo name="plus" size={24} color="#6A1B9A" />}
-            }/>
+                { tabBarIcon: () => <Entypo name="plus" size={24} color="#6A1B9A" /> }
+            } />
             <Tab.Screen name='Mi perfil' component={MiPerfil} options={
-                {tabBarIcon: ()=> <Entypo name="user" size={24} color="#6A1B9A" />}
-            }/>
+                { tabBarIcon: () => <Entypo name="user" size={24} color="#6A1B9A" /> }
+            } />
             <Tab.Screen name='Buscador' component={Buscador} options={
-                {tabBarIcon: ()=> <Entypo name="magnifying-glass" size={24} color="#6A1B9A" />}
-            }/>
+                { tabBarIcon: () => <Entypo name="magnifying-glass" size={24} color="#6A1B9A" /> }
+            } />
         </Tab.Navigator>
     )
 }

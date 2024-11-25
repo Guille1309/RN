@@ -17,22 +17,22 @@ class Buscador extends Component {
 
     componentDidMount() {
         db.collection('users').onSnapshot(docs => {
-                let resultados = [];
-                docs.forEach(doc =>{
-                    resultados.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                })
-                this.setState({
-                    resultados: resultados,
-                    cargando: false,
-                    backup: resultados,
+            let resultados = [];
+            docs.forEach(doc => {
+                resultados.push({
+                    id: doc.id,
+                    data: doc.data()
                 })
             })
+            this.setState({
+                resultados: resultados,
+                cargando: false,
+                backup: resultados,
+            })
+        })
     }
 
-    filtrar(user){
+    filtrar(user) {
         let usuariosFiltrados = this.state.backup.filter(resultado => resultado.data.userName.toLowerCase().includes(user.toLowerCase()));
         this.setState({
             resultados: usuariosFiltrados,
@@ -42,16 +42,16 @@ class Buscador extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header/>
+                <Header />
                 <Filtro filtrar={(user) => this.filtrar(user)} />
-                {this.state.cargando ? <ActivityIndicator/> : 
+                {this.state.cargando ? <ActivityIndicator /> :
                     (this.state.resultados.length === 0) ? (
-                    <Text style={styles.textoNoUserName}>El user name no existe</Text>
+                        <Text style={styles.textoNoUserName}>El user name no existe</Text>
                     ) : (
                         <FlatList style={styles.containerUsuarios} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Text style={styles.usuarios}>{item.data.userName}</Text>} />
                     )
                 }
-                
+
             </View>
         )
     }
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         color: "#6A1B9A",
         marginBottom: 20,
     },
-    containerUsuarios:{
+    containerUsuarios: {
         width: '100%',
     },
     usuarios: {

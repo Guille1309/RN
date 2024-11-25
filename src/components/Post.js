@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { StyleSheet } from "react-native";
-import { Text, TouchableOpacity, View } from "react-native-web";
+import { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native-web';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { auth, db } from "../firebase/config";
+import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
@@ -68,7 +68,7 @@ class Post extends Component {
             <View style={styles.container}>
                 {this.state.usuario === this.state.datos.owner && !this.props.isHome ? (
                     <TouchableOpacity onPress={() => this.borrarPost(this.state.id)}>
-                        <FontAwesome6 name="trash-can" size={20} color="#4A148C" />
+                        <FontAwesome6 name='trash-can' size={20} color='#4A148C' />
                     </TouchableOpacity>
                 ) : null}
                 <View style={styles.containerPost}>
@@ -79,12 +79,12 @@ class Post extends Component {
                             style={styles.likeButton}
                             onPress={() => this.actualizarLikes(this.state.id)}>
                             <AntDesign
-                                name={this.state.usuarioLikeo ? "heart" : "hearto"}
+                                name={this.state.usuarioLikeo ? 'heart' : 'hearto'}
                                 size={20}
-                                color="#FFFFFF"
+                                color='#FFFFFF'
                             />
                             <Text style={styles.likeText}>
-                                {this.state.usuarioLikeo ? "Te gusta" : "Me gusta"}
+                                {this.state.usuarioLikeo ? 'Te gusta' : 'Me gusta'}
                             </Text>
                             <Text style={styles.likeText}>{this.state.cantLikes}</Text>
                         </TouchableOpacity>
@@ -118,32 +118,32 @@ const styles = StyleSheet.create({
     },
     textoPost: {
         fontSize: 16,
-        color: "#4A148C",
+        color: '#4A148C',
     },
     likes: {
         fontSize: 14,
-        color: "#6A1B9A",
-        fontWeight: "bold",
+        color: '#6A1B9A',
+        fontWeight: 'bold',
         marginTop: 5,
     },
     likeContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         marginTop: 10,
     },
     likeButton: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#8E24AA",
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#8E24AA',
         paddingVertical: 6,
         paddingHorizontal: 10,
         borderRadius: 20,
     },
     likeText: {
-        color: "#FFFFFF",
+        color: '#FFFFFF',
         fontSize: 16,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         marginLeft: 8,
     },
 });

@@ -1,11 +1,11 @@
-import { ActivityIndicator, FlatList, Text } from "react-native";
-import { StyleSheet, View } from "react-native";
-import { Component } from "react";
-import { db } from "../firebase/config";
-import Post from "../components/Post";
-import Header from "../components/Header";
+import { ActivityIndicator, FlatList, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Component } from 'react';
+import { db } from '../firebase/config';
+import Post from '../components/Post';
+import Header from '../components/Header';
 
-class Home extends Component{
+class Home extends Component {
 
     constructor(props) {
         super(props)
@@ -29,8 +29,8 @@ class Home extends Component{
     }
     render() {
         return (
-            <View style = {styles.homeContainer}>
-                <Header/>
+            <View style={styles.homeContainer}>
+                <Header />
                 {this.state.cargando ? <ActivityIndicator /> : <FlatList style={styles.postList} data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={true} />} />}
             </View>
         )

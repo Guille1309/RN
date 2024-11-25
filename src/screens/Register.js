@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { auth, db } from "../firebase/config";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native";
-import Header from "../components/Header";
+import { Component } from 'react';
+import { auth, db } from '../firebase/config';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import Header from '../components/Header';
 
 class Register extends Component {
     constructor(props) {
@@ -16,9 +16,6 @@ class Register extends Component {
             usuarios: '',
             cargando: true,
             deshabilitado: true,
-            errorEmail: '',
-            errorPass: '',
-            errorUsuario: '',
             tocoEmail: false,
             tocoPass: false,
             tocoUser: false
@@ -33,10 +30,9 @@ class Register extends Component {
             } else {
                 this.props.navigation.navigate('Register')
             }
-            console.log(user)
         })
     }
-
+    /* Verificación de que ingrese los datos. || que no pueda enviar algo vacío*/
     datosInput(campo, valor) {
         this.setState({ [campo]: valor.trim() }, () => {
             if (!valor.trim()) {
@@ -70,6 +66,7 @@ class Register extends Component {
             })
             .catch(error => {
                 this.setState({ error: 'Fallo en el registro' })
+                /* Traducción de mensajes de error más comunes */
                 if (error.code === 'auth/invalid-email') {
                     this.setState({
                         error: 'Ingrese un formato válido de email.'
@@ -77,6 +74,10 @@ class Register extends Component {
                 } else if (error.code === 'auth/weak-password') {
                     this.setState({
                         error: 'Ingrese una contraseña de más de 6 caracteres.'
+                    })
+                } else if (error.code === 'auth/email-already-in-use') {
+                    this.setState({
+                        error: 'El email que ingresó ya se encuentra registrado. Ingrese uno nuevo.'
                     })
                 } else {
                     this.setState({
@@ -98,36 +99,36 @@ class Register extends Component {
                     keyboardType='email-address'
                     placeholder='email'
                     onChangeText={text => this.datosInput('email', text)}
-                    onBlur={ () => this.setState({ tocoEmail: true })}
+                    onBlur={() => this.setState({ tocoEmail: true })}
                     value={this.state.email}
                 />
 
                 <Text style={styles.campoVacio}>
-                    {!this.state.email && this.state.tocoEmail ?"Complete el email." : null }
+                    {!this.state.email && this.state.tocoEmail ? 'Complete el email.' : null}
                 </Text>
-                
+
 
                 <TextInput style={styles.input}
                     keyboardType='default'
                     placeholder='password'
                     secureTextEntry={true}
                     onChangeText={text => this.datosInput('password', text)}
-                    onBlur={ () => this.setState({ tocoPass: true })}
+                    onBlur={() => this.setState({ tocoPass: true })}
                     value={this.state.password}
                 />
                 <Text style={styles.campoVacio}>
-                    {!this.state.password && this.state.tocoPass ? "Complete la contraseña." : null }
+                    {!this.state.password && this.state.tocoPass ? 'Complete la contraseña.' : null}
                 </Text>
 
                 <TextInput style={styles.input}
                     keyboardType='default'
-                    placeholder='Nombre de usuario'
+                    placeholder='nombre de usuario'
                     onChangeText={text => this.datosInput('user', text)}
-                    onBlur={ () => this.setState({ tocoUser: true })}
+                    onBlur={() => this.setState({ tocoUser: true })}
                     value={this.state.user}
                 />
                 <Text style={styles.campoVacio}>
-                    {!this.state.user && this.state.tocoUser ? "Complete el usuario." : null }
+                    {!this.state.user && this.state.tocoUser ? 'Complete el usuario.' : null}
                 </Text>
                 <Text style={styles.campoVacio}>
                     {this.state.error ? this.state.error : null}
@@ -151,54 +152,54 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#F3E5F5",
-        alignItems: "center",
+        backgroundColor: '#F3E5F5',
+        alignItems: 'center',
     },
     titulo: {
         fontSize: 24,
-        fontWeight: "bold",
-        color: "#6A1B9A",
+        fontWeight: 'bold',
+        color: '#6A1B9A',
         marginBottom: 20,
     },
     input: {
-        width: "90%",
+        width: '90%',
         padding: 15,
-        backgroundColor: "#EDE7F6",
+        backgroundColor: '#EDE7F6',
         borderRadius: 10,
-        borderColor: "#7B1FA2",
+        borderColor: '#7B1FA2',
         borderWidth: 1,
         marginBottom: 15,
         fontSize: 16,
-        color: "#4A148C",
+        color: '#4A148C',
     },
     botonH: {
-        backgroundColor: "#8E24AA",
+        backgroundColor: '#8E24AA',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 8,
-        alignItems: "center",
-        width: "90%",
+        alignItems: 'center',
+        width: '90%',
         marginBottom: 15,
     },
     botonD: {
-        backgroundColor: "#D1C4E9",
+        backgroundColor: '#D1C4E9',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 8,
-        alignItems: "center",
-        width: "90%",
+        alignItems: 'center',
+        width: '90%',
         marginBottom: 15,
     },
     textoBoton: {
         fontSize: 18,
-        fontWeight: "bold",
-        color: "#FFFFFF",
+        fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     campoVacio: {
-        color: "red",
+        color: 'red',
         fontSize: 14,
         marginBottom: 10,
-        width: "90%",
+        width: '90%',
     },
 });
 

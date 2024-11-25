@@ -1,26 +1,26 @@
 import { Component } from "react"
 import { StyleSheet } from "react-native";
-import { View, TextInput} from "react-native-web";
+import { View, TextInput } from "react-native-web";
 import Entypo from '@expo/vector-icons/Entypo';
 
 
-class Filtro extends Component{
-    constructor(){
+class Filtro extends Component {
+    constructor() {
         super();
-        this.state={
+        this.state = {
             valorInput: '',
         }
     }
 
-    controladorCambios(text){
+    controladorCambios(text) {
         this.setState(
             { valorInput: text },
             () => this.props.filtrar(this.state.valorInput)
         );
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.container}>
                 <TextInput style={styles.input}
                     keyboardType="default"
@@ -28,7 +28,7 @@ class Filtro extends Component{
                     onChangeText={(text) => this.controladorCambios(text)}
                     value={this.state.valorInput}
                 />
-                <Entypo name="magnifying-glass" size={24} color="#6A1B9A" style={styles.icono}/>
+                <Entypo name="magnifying-glass" size={24} color="#6A1B9A" style={styles.icono} />
             </View>
         )
     }

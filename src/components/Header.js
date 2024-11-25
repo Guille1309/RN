@@ -7,7 +7,7 @@ function Header() {
         <View style={styles.headerContainer}>
             <View style={styles.logoContainer}>
                 <Text style={styles.logo}>SayIt</Text>
-                <FontAwesome name="comment-o" size={40} color="#6A1B9A" style={styles.icono} />
+                <FontAwesome name='comment-o' size={40} color='#6A1B9A' style={styles.icono} />
             </View>
             <Text style={styles.slogan}>Una app para expresarse libremente</Text>
         </View>
@@ -17,7 +17,7 @@ function Header() {
 const styles = StyleSheet.create({
     headerContainer: {
         width: '100%',
-        paddingVertical: 15,
+        paddingBottom: 20,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F3E5F5',
