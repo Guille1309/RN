@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from "react-native-web";
+import { Component } from 'react';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native-web';
 import { auth, db } from '../firebase/config';
-import Header from "../components/Header";
-import Filtro from "../components/Filtro";
+import Header from '../components/Header';
+import Filtro from '../components/Filtro';
 
 class Buscador extends Component {
     constructor() {
@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#F3E5F5",
-        alignItems: "center",
+        backgroundColor: '#F3E5F5',
+        alignItems: 'center',
     },
     textoNoUserName: {
         fontSize: 24,
-        fontWeight: "bold",
-        color: "#6A1B9A",
+        fontWeight: 'bold',
+        color: '#6A1B9A',
         marginBottom: 20,
     },
     containerUsuarios: {
@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
     },
     usuarios: {
         fontSize: 16,
-        color: "#6A1B9A",
+        color: '#6A1B9A',
         marginVertical: 10,
         marginHorizontal: 20,
         padding: 15,
         borderBottomWidth: 2,
-        borderColor: "#E1BEE7",
+        borderColor: '#E1BEE7',
         flex: 1
     }
 });

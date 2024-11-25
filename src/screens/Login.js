@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native-web";
-import { auth } from "../firebase/config";
-import { StyleSheet } from "react-native";
-import Header from "../components/Header";
+import { Component } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native-web';
+import { auth } from '../firebase/config';
+import { StyleSheet } from 'react-native';
+import Header from '../components/Header';
 
 class Login extends Component {
     constructor(props) {
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#F3E5F5",
-        alignItems: "center",
+        backgroundColor: '#F3E5F5',
+        alignItems: 'center',
     },
     titulo: {
         fontSize: 24,
-        fontWeight: "bold",
-        color: "#6A1B9A",
+        fontWeight: 'bold',
+        color: '#6A1B9A',
         marginBottom: 20,
     },
     texto: {
@@ -107,23 +107,23 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     input: {
-        width: "90%",
+        width: '90%',
         padding: 15,
-        backgroundColor: "#EDE7F6",
+        backgroundColor: '#EDE7F6',
         borderRadius: 10,
-        borderColor: "#7B1FA2",
+        borderColor: '#7B1FA2',
         borderWidth: 1,
         marginBottom: 15,
         fontSize: 16,
-        color: "#4A148C",
+        color: '#4A148C',
     },
     boton: {
-        backgroundColor: "#8E24AA",
+        backgroundColor: '#8E24AA',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 8,
-        alignItems: "center",
-        width: "90%",
+        alignItems: 'center',
+        width: '90%',
         marginBottom: 15,
     },
     textoBoton: {

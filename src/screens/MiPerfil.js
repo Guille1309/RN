@@ -1,10 +1,10 @@
-import { Component } from "react";
+import { Component } from 'react';
 import { auth, db } from '../firebase/config';
-import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native-web";
-import Post from "../components/Post";
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native-web';
+import Post from '../components/Post';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { StyleSheet } from "react-native";
-import Header from "../components/Header";
+import { StyleSheet } from 'react-native';
+import Header from '../components/Header';
 
 class MiPerfil extends Component {
     constructor(props) {
@@ -56,7 +56,7 @@ class MiPerfil extends Component {
                 <Text style={styles.titulo}>Mis posts</Text>
                 {this.state.cargando ? <ActivityIndicator /> : (this.state.posts.length === 0 ? <Text style={styles.texto}>No tienes posts aún...</Text> : <FlatList style={styles.listaPosts} data={this.state.posts} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Post datos={item} isHome={false} />} />)}
                 <TouchableOpacity style={styles.containerLogout} onPress={() => this.logout()}>
-                    <MaterialCommunityIcons name="logout" size={24} color="#4A148C" />
+                    <MaterialCommunityIcons name='logout' size={24} color='#4A148C' />
                     <Text style={styles.textoLogout}>Cerrar sesión</Text>
                 </TouchableOpacity>
             </View>
@@ -68,38 +68,38 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#F3E5F5",
-        alignItems: "center",
+        backgroundColor: '#F3E5F5',
+        alignItems: 'center',
     },
     titulo: {
         fontSize: 24,
-        fontWeight: "bold",
-        color: "#6A1B9A",
+        fontWeight: 'bold',
+        color: '#6A1B9A',
         marginVertical: 10,
     },
     texto: {
         fontSize: 16,
-        color: "#4A148C",
+        color: '#4A148C',
         marginBottom: 5,
     },
     listaPosts: {
-        width: "100%",
+        width: '100%',
         marginTop: 10,
     },
     itemPosts: {
-        backgroundColor: "#E1BEE7",
+        backgroundColor: '#E1BEE7',
         padding: 15,
         borderRadius: 8,
         marginBottom: 10,
     },
     containerLogout: {
         marginTop: 20,
-        alignItems: "center",
+        alignItems: 'center',
     },
     textoLogout: {
         fontSize: 16,
-        fontWeight: "bold",
-        color: "#6A1B9A",
+        fontWeight: 'bold',
+        color: '#6A1B9A',
     },
 });
 
