@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeMenu from './src/components/HomeMenu';
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
-import ResultadosBusqueda from './src/screens/ResultadosBusqueda';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,7 +14,6 @@ export default function App() {
         <Stack.Screen name='Register' component={ Register } options={ {headerShown: false} }/>
         <Stack.Screen name='Login' component={ Login } options={ {headerShown: false} }/>
         <Stack.Screen name='HomeMenu' component={ HomeMenu } options={ {headerShown: false} }/>
-        <Stack.Screen name='ResultadosBusqueda' component={ ResultadosBusqueda } options={ {headerShown: false} }/>
       </Stack.Navigator>
     </NavigationContainer>
   );
