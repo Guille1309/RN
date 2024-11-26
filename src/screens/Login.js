@@ -21,7 +21,6 @@ class Login extends Component {
             } else {
                 this.props.navigation.navigate('Login')
             }
-            console.log(user)
         })
     }
 
@@ -34,7 +33,6 @@ class Login extends Component {
                 this.props.navigation.navigate('HomeMenu');
             })
             .catch(error => {
-                console.log(error);
                 if (error.code === 'auth/internal-error') {
                     this.setState({
                         error: 'Credenciales inválidas'
