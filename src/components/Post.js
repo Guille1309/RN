@@ -6,7 +6,6 @@ import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-
 class Post extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +15,6 @@ class Post extends Component {
             usuario: auth.currentUser.email,
             usuarioLikeo: this.props.datos.data.likes.includes(auth.currentUser.email),
             cantLikes: this.props.datos.data.likes.length,
-
         }
     }
 

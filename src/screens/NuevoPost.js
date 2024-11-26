@@ -23,6 +23,9 @@ class NuevoPost extends Component {
                 createdAt: Date.now(),
                 likes: []
             })
+            this.setState({
+                post: ''
+            })
             this.props.navigation.navigate('Home')
         }
         else {
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#6A1B9A',
-        marginBottom: 20,
+        marginVertical: 20,
     },
     input: {
         width: '90%',
@@ -91,4 +94,5 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
 export default NuevoPost;

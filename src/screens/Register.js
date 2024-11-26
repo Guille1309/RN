@@ -61,8 +61,6 @@ class Register extends Component {
                     userName: userName,
                 })
                 this.props.navigation.navigate('Login')
-
-
             })
             .catch(error => {
                 this.setState({ error: 'Fallo en el registro' })
@@ -85,7 +83,6 @@ class Register extends Component {
                     })
                 }
             })
-
     }
 
     render() {
@@ -106,7 +103,6 @@ class Register extends Component {
                 <Text style={styles.campoVacio}>
                     {!this.state.email && this.state.tocoEmail ? 'Complete el email.' : null}
                 </Text>
-
 
                 <TextInput style={styles.input}
                     keyboardType='default'
@@ -140,9 +136,6 @@ class Register extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.botonH}>
                     <Text style={styles.textoBoton}>Ir a login</Text>
                 </TouchableOpacity>
-
-
-
             </View>
         )
     }

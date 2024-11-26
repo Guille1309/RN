@@ -3,10 +3,9 @@ import { StyleSheet } from 'react-native';
 import { View, TextInput } from 'react-native-web';
 import Entypo from '@expo/vector-icons/Entypo';
 
-
 class Filtro extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             valorInput: '',
         }
@@ -33,6 +32,7 @@ class Filtro extends Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',

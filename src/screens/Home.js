@@ -6,7 +6,6 @@ import Post from '../components/Post';
 import Header from '../components/Header';
 
 class Home extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -14,6 +13,7 @@ class Home extends Component {
             cargando: true
         }
     }
+
     componentDidMount() {
         db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(docs => {
             let posts = [];
@@ -27,6 +27,7 @@ class Home extends Component {
             })
         })
     }
+    
     render() {
         return (
             <View style={styles.homeContainer}>

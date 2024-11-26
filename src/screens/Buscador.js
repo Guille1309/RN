@@ -46,7 +46,7 @@ class Buscador extends Component {
                 <Filtro filtrar={(user) => this.filtrar(user)} />
                 {this.state.cargando ? <ActivityIndicator /> :
                     (this.state.resultados.length === 0) ? (
-                        <Text style={styles.textoNoUserName}>El user name no existe</Text>
+                        <Text style={styles.textoNoUserName}>No existe ningún usuario con ese nombre :(</Text>
                     ) : (
                         <FlatList style={styles.containerUsuarios} data={this.state.resultados} keyExtractor={item => item.id.toString()} renderItem={({ item }) => <Text style={styles.usuarios}>{item.data.userName}</Text>} />
                     )

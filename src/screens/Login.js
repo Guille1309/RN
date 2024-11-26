@@ -52,6 +52,7 @@ class Login extends Component {
                 }
             })
     }
+
     render() {
         return (
             <View style={styles.container}>
@@ -71,7 +72,7 @@ class Login extends Component {
                     onChangeText={text => this.setState({ password: text })}
                     value={this.state.password}
                 />
-
+                
                 <TouchableOpacity onPress={() => { this.login(this.state.email, this.state.password) }} style={styles.boton}>
                     <Text style={styles.textoBoton}>Entrar en la app</Text>
                 </TouchableOpacity>
